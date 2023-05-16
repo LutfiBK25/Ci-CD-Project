@@ -40,7 +40,7 @@ pipeline{
     }
     post{
         always{
-            echo "${VERISON}"
+            echo "${VERSION}"
             echo "Sucess"
         }
         
