@@ -27,10 +27,10 @@ pipeline{
                 script{
                     withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
                     sh '''
-                    docker build -t 54.173.32.46:8083/devopsproj1 .
+                    docker build -t 54.173.32.46:8083/devopsproj1:${VERSION} .
                     docker login -u admin -p $nexus_password 54.173.32.46:8083
-                    docker push  54.173.32.46:8083/devopsproj1
-                    docker rmi  54.173.32.46:8083/devopsproj1
+                    docker push  54.173.32.46:8083/devopsproj1:${VERSION}
+                    docker rmi  54.173.32.46:8083/devopsproj1:${VERSION}
                     '''
                     }
                     
