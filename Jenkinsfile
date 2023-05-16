@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment{
+        VERSION = "${env.BUILD_ID}"
+    }
     stages{
         stage("sonar_quality_check"){
             
@@ -18,6 +21,21 @@ pipeline{
                 }
             }
         
+        }
+        stage("dockerbuild & pudh"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
+                    sh '''
+                    docker build -t 54.173.32.46:8083/devOpsProj1:$(VERSION) .
+                    docker login -u admin -p $nexus_password 54.173.32.46:8083
+                    docker push  54.173.32.46:8083/devOpsProj1:$(VERSION)
+                    docker rmi  54.173.32.46:8083/devOpsProj1:$(VERSION)
+                    '''
+                    }
+                    
+                }
+            }
         }
     }
     post{
