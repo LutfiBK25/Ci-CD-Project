@@ -14,6 +14,10 @@
 - Create 5 EC2 instances (Jenkins, Nexus, Sonarqube, Master Node, Worker Node)
 - Configure Security groups and enable ports for all Jenkins/Nexus/Kubernets/Calico/SonarQube
 
+- install datree plugin for helm on Jenkins (you are going to need unzip installed)
+```
+helm plugin install https://github.com/datreeio/helm-datree
+```
 ### Configuring Mail server:
 - Add Email Extention Plugin to Jenkins and add email in Configuere system
 - in System Configuration: go to the E-mail Notification
