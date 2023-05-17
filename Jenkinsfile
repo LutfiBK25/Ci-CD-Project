@@ -39,9 +39,11 @@ pipeline{
         }
     }
     post{
-        always{
+        always{ // always means it will happen if it was sucess or fail
             echo "${VERSION}"
             echo "Sucess"
+            mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "deekshith.snsep@gmail.com";
+	
         }
         
     }
