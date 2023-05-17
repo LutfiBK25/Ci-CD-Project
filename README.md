@@ -59,7 +59,7 @@ in jenkins EC2
 ```
 sudo chmod 666 /var/run/docker.sock
 ```
-If you manage to to get a workaround for the graphical login, this should do the job :
+the first command should be enough but If you manage to to get a workaround for the graphical login, this should do the job :
 ```
 sudo chgrp docker /lib/systemd/system/docker.socket
 sudo chmod g+w /lib/systemd/system/docker.socket
