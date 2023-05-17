@@ -22,7 +22,7 @@ pipeline{
             }
         
         }
-        stage("dockerbuild & pudh"){
+        stage("docker build & push"){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
@@ -34,6 +34,15 @@ pipeline{
                     '''
                     }
                     
+                }
+            }
+        }
+        stage("identifying misconfigs using datree in helm charts"){
+            steps{
+                script{
+                    dir('kubernetes/') {
+                        sh 'helm datree test myapp/'
+                    }
                 }
             }
         }

@@ -6,11 +6,13 @@
 - Nexus
 - SonarQube
 - Helm
-- 
+- datree.io
 
 
 ## Steps
-### Create 5 EC2 instances (Jenkins, Nexus, Sonarqube, Master Node, Worker Node)
+### Preping my Enviroment
+- Create 5 EC2 instances (Jenkins, Nexus, Sonarqube, Master Node, Worker Node)
+- Configure Security groups and enable ports for all Jenkins/Nexus/Kubernets/Calico/SonarQube
 
 ### Configuring Mail server:
 - Add Email Extention Plugin to Jenkins and add email in Configuere system
@@ -28,15 +30,17 @@ On your Google account: <br />
 - in Extended E-mail notification add the smtp server again and use same port
 - in advanced setting add credentials again and check use SSL 
 - Set default content type to HTML
-- add the code to jenkinsfile to use the mail server
+- add the code in the post to jenkinsfile to use the mail server
 ```
-post {
-		always {
 			mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "deekshith.snsep@gmail.com";  
-		}
-	}
 ```
 
+### Write the helm charts (It is in Kubernets Folder)
+
+### Detecting misconfiguration in Helm Charts using datree
+- add stage to jenkins files
+- go to snippet generator in jenkins and get dir and type `kubernetes/` for path and generate
+- using datree documentation to write the code https://github.com/datreeio/helm-datree
 
 
 
