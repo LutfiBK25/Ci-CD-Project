@@ -68,6 +68,15 @@ sudo chgrp docker /lib/systemd/system/docker.socket
 sudo chmod g+w /lib/systemd/system/docker.socket
 ```
 
+
+### Jenkins EC2 storage full which stopped building pipelines
+- Error : Your Jenkins data directory /var/lib/jenkins (AKA JENKINS_HOME) is almost full. You should act on it before it gets completely full.
+- Solution: Checked and it was the docker directory in lib which has the overlay2 file so i used the following clear it. to cleanup unused containers and images
+'''
+docker system prune
+'''
+note : you can add a Crontab task for it to be cleaned regularly
+
 ### Datree Policies
 
 [X] Policy check

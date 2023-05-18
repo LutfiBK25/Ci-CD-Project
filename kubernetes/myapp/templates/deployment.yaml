@@ -18,7 +18,7 @@ spec:
         - name: registry-secret
       containers:
         - name: {{ .Chart.Name }}
-        securityContext:
+          securityContext:
             allowPrivilegeEscalation: false
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh"]
