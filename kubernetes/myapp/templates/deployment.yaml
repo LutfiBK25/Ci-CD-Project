@@ -15,7 +15,7 @@ spec:
       labels:
         {{- include "myapp.selectorLabels" . | nindent 8 }}
       annotations:
-        seccomp.security.alpha.kubernetes.io/deployment: runtime/default
+        seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       imagePullSecrets:
         - name: registry-secret
