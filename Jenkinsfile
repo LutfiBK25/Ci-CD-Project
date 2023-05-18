@@ -44,9 +44,11 @@ pipeline{
                         // sh 'helm plugin uninstall datree'
                         // sh 'helm plugin install https://github.com/datreeio/helm-datree'
                         sh 'pwd'
-                        sh 'helm datree test myapp/'
                         sh 'helm datree version'
                         sh 'which datree && which helm && whoami'
+                        withEnv(['DATREE_TOKEN=b96e3fa8-80a7-48a0-9c81-43e7063307e9']) {
+                              sh 'helm datree test myapp/'
+                        }
                     }
                 }
             }
