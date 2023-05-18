@@ -4,8 +4,7 @@ metadata:
   name: {{ include "myapp.fullname" . }}
   labels:
     {{- include "myapp.labels" . | nindent 4 }}
-  annotations:
-    seccomp.security.alpha.kubernetes.io/deployment: runtime/default
+  
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,6 +14,8 @@ spec:
     metadata:
       labels:
         {{- include "myapp.selectorLabels" . | nindent 8 }}
+      annotations:
+        seccomp.security.alpha.kubernetes.io/deployment: runtime/default
     spec:
       imagePullSecrets:
         - name: registry-secret
