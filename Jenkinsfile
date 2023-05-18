@@ -43,8 +43,9 @@ pipeline{
                     dir('kubernetes/') {
                         // sh 'helm plugin uninstall datree'
                         // sh 'helm plugin install https://github.com/datreeio/helm-datree'
+                        sh 'pwd'
                         sh 'helm datree version'
-                        sh 'which datree && which helm'
+                        sh 'which datree && which helm && whoami'
                     }
                 }
             }
