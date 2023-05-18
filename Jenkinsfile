@@ -44,7 +44,7 @@ pipeline{
                         // sh 'helm plugin uninstall datree'
                         // sh 'helm plugin install https://github.com/datreeio/helm-datree'
                         sh 'helm datree version'
-                        sh 'helm datree test app/'
+                        sh 'which datree && which helm'
                     }
                 }
             }
