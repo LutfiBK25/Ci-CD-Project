@@ -21,6 +21,8 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
+            capabilities:
+              drop: ["NET_RAW"]
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh"]
           args: ["-c","sh /usr/local/tomcat/bin/startup.sh;while true; do echo hello; sleep 10;done"]
