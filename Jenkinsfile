@@ -41,8 +41,8 @@ pipeline{
             steps{
                 script{
                     dir('kubernetes/') {
-                        sh 'helm plugin uninstall datree'
-                        sh 'helm plugin install https://github.com/datreeio/helm-datree'
+                        // sh 'helm plugin uninstall datree'
+                        // sh 'helm plugin install https://github.com/datreeio/helm-datree'
                         sh 'helm datree version'
                         sh 'ip addr'
                     }
