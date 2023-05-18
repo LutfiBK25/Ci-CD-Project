@@ -45,6 +45,9 @@ On your Google account: <br />
 - add stage to jenkins files
 - go to snippet generator in jenkins and get dir and type `kubernetes/` for path and generate
 - using datree documentation to write the code https://github.com/datreeio/helm-datree
+- add token and jenkinsfile datree script
+- you can turn on and off policies from datree interfance in policies section
+- policy errors i got i put at the end
 
 
 
@@ -64,3 +67,43 @@ the first command should be enough but If you manage to to get a workaround for 
 sudo chgrp docker /lib/systemd/system/docker.socket
 sudo chmod g+w /lib/systemd/system/docker.socket
 ```
+
+### Datree Policies
+
+[X] Policy check
+
+[X]  Ensure seccomp profile is set to docker/default or runtime/default  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+      > key: spec.template.metadata (line: 43:7)
+
+[*]  Invalid value for key `seccomp.security.alpha.kubernetes.io/pod` - set to docker/default or runtime/default to ensure restricted privileges
+
+[X]  Ensure containers and pods have a configured security context  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+
+[*]  Missing key `securityContext` - set to enforce your containers' security and stability
+
+[X]  Prevent the admission of containers with the NET_RAW capability  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+      > key: spec.template.spec.containers.0 (line: 50:11)
+
+[*]  Invalid value for key `drop` - prohibit the potentially dangerous NET_RAW capability
+
+[X]  Ensure each container has a read-only root filesystem  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+      > key: spec.template.spec.containers.0 (line: 50:11)
+
+[*]  Incorrect value for key `readOnlyRootFilesystem` - set to 'true' to protect filesystem from potential attacks
+
+[X]  Prevent container from running with root privileges  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+      > key: spec.template.spec.containers.0 (line: 50:11)
+
+[*]  Invalid value for key `runAsNonRoot` - must be set to `true` to prevent unnecessary privileges
+
+[X]  Prevent containers from escalating privileges  [1 occurrence]
+    - metadata.name: release-name-myapp (kind: Deployment)
+      > key: spec.template.spec.containers.0 (line: 50:11)
+
+[*]  Missing key `allowPrivilegeEscalation` - set to false to prevent attackers from exploiting escalated container privileges
+
