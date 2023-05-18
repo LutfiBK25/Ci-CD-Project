@@ -18,8 +18,6 @@ spec:
         - name: registry-secret
       containers:
         - name: {{ .Chart.Name }}
-          annotations:
-            seccomp.security.alpha.kubernetes.io/pod: docker/default
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
