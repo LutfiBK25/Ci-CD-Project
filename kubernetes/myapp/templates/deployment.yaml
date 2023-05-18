@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "myapp.labels" . | nindent 4 }}
   annotations:
-    seccomp.security.alpha.kubernetes.io/deployment: docker/default
+    seccomp.security.alpha.kubernetes.io/deployment: runtime/default
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
