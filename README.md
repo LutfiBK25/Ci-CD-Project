@@ -49,8 +49,9 @@ On your Google account: <br />
 - you can turn on and off policies from datree interfance in policies section
 - policy errors i got i put at the end
 
-
-
+### Pushing helm charts to private repo (nexus reg)
+- in nexus; create a helm (hosted) repository and keep everything in default settings
+- create stage in Jenkinsfile
 ## Errors
 ### Calico Nodes were not in ready state
 - Solution: open BGP port TCP 179

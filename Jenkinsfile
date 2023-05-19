@@ -52,6 +52,24 @@ pipeline{
                 }
             }
         }
+        stage("pushing helm charts to nexus"){
+            steps{
+                script{
+                    dir('kubernetes/') {
+                        withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_password')]) {
+                        //next command is what push helm charts to nexus
+                        //first command grabs the version of helm (Check grep_tutorial.txt)
+                        //second command will create the artifact (it takes the folder (myapp) and create tgz)
+                        sh '''
+                        helmversion=$(helm show chart myapp | grep version | cut -d: -f 2 | tr -d ' ')
+                        tar -czvf  myapp-${helmversion}.tgz myapp/
+                        curl -u admin:$nexus_password http://54.173.32.46/:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
+                        '''
+                        }
+                    } 
+                }
+            }
+        }
     }
     post{
         always{ // always means it will happen if it was sucess or fail

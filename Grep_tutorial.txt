@@ -1,0 +1,34 @@
+ubuntu@Jenkins:/var/lib/jenkins/workspace/job_pipeline/kubernetes$ helm show chart myapp
+apiVersion: v2
+appVersion: 1.16.0
+description: A Helm chart for Kubernetes
+name: myapp
+type: application
+version: 0.2.0
+
+ubuntu@Jenkins:/var/lib/jenkins/workspace/job_pipeline/kubernetes$ helm show chart myapp | tr -d ' '
+apiVersion:v2
+appVersion:1.16.0
+description:AHelmchartforKubernetes
+name:myapp
+type:application
+version:0.2.0
+
+ubuntu@Jenkins:/var/lib/jenkins/workspace/job_pipeline/kubernetes$ helm show chart myapp | cut -d: -f 2
+ v2
+ 1.16.0
+ A Helm chart for Kubernetes
+ myapp
+ application
+ 0.2.0
+
+ubuntu@Jenkins:/var/lib/jenkins/workspace/job_pipeline/kubernetes$ helm show chart myapp | cut -d: -f 1
+apiVersion
+appVersion
+description
+name
+type
+version
+
+ubuntu@Jenkins:/var/lib/jenkins/workspace/job_pipeline/kubernetes$ helm show chart myapp | grep version | cut -d: -f 2 | tr -d ' '
+0.2.0
