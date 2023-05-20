@@ -58,7 +58,30 @@ On your Google account: <br />
 - install k8s plugin
 - in manage jenkins go to Manage Nodes and Clouds and through cloud add and kubernetes and add credential through file and copy config file in .kube in master node and upload it
 - creating jenkins stage use kubeconfig syntax to handle the connection
+- create a file /etc/docker/daemon.json in that file add details of nexus
+```
+{ "insecure-registries":["nexus_machine_ip:8083"] }
+```
+`systemctl restart docker`
+- create a secret in k8s cluster master
+```
+kubectl create secret docker-registry registry-secret --docker-server=nexus_machine_ip_only:8083 --docker-username=admin --docker-password=admin --docker-email=not-needed@example.com
+```
 
+look in deployment.yaml to see the reference to registry secret
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec:
+  containers:
+    - name: foo
+      image: nginx
+  imagePullSecrets:
+    - name: registry-secret
+```
 
 
 
@@ -89,7 +112,8 @@ docker system prune
 note : you can add a Crontab task for it to be cleaned regularly
 
 ### Jenkins kubectl command not found
-- downloaded ./kubectl once and started using it in the pipeline, change the version to the one needed
+- Problem : while testing connection of jenkins to k8s cluster, kubectl not found error happened
+- Solution : downloaded ./kubectl once and started using it in the pipeline, change the version to the one needed
 '''
 sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.27.1/bin/linux/amd64 kubectl"'  
 sh 'chmod u+x ./kubectl'

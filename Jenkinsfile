@@ -74,13 +74,9 @@ pipeline{
             steps {
                 script{
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'mykubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                
-                    // first 2 commands used once to download ./kubectl
-                    // sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.27.1/bin/linux/amd64/kubectl"'  
-                    // sh 'chmod u+x ./kubectl'
-                    // sh './kubectl get nodes'
-                    // sh './kubectl version --short'
-                    sh 'helm version'
+                        dir('kubernetes/') {
+                            sh 'helm upgrade --install --set image.repository="54.173.32.46:8083/devopsproj1" --set image.tag="${VERSION}" myjavaapp myapp/ '
+                        }
                     }
                 }
             }
