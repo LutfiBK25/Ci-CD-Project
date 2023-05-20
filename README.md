@@ -52,6 +52,16 @@ On your Google account: <br />
 ### Pushing helm charts to private repo (nexus reg)
 - in nexus; create a helm (hosted) repository and keep everything in default settings
 - create stage in Jenkinsfile
+
+### adding deploy helm charts to k8s cluster stage
+- copy config from .kube in master node
+- install k8s plugin
+- in manage jenkins go to Manage Nodes and Clouds and through cloud add and kubernetes and add credential through file and copy config file in .kube in master node and upload it
+- creating jenkins stage use kubeconfig syntax to handle the connection
+
+
+
+
 ## Errors
 ### Calico Nodes were not in ready state
 - Solution: open BGP port TCP 179
@@ -77,6 +87,16 @@ sudo chmod g+w /lib/systemd/system/docker.socket
 docker system prune
 ```
 note : you can add a Crontab task for it to be cleaned regularly
+
+### Jenkins kubectl command not found
+- downloaded ./kubectl once and started using it in the pipeline, change the version to the one needed
+'''
+sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.27.1/bin/linux/amd64 kubectl"'  
+sh 'chmod u+x ./kubectl'
+// to test kubectl working
+sh './kubectl get nodes'
+sh './kubectl version --short'
+'''
 
 ### Datree Policies
 
@@ -116,4 +136,5 @@ note : you can add a Crontab task for it to be cleaned regularly
       > key: spec.template.spec.containers.0 (line: 50:11)
 
 [*]  Missing key `allowPrivilegeEscalation` - set to false to prevent attackers from exploiting escalated container privileges
+
 

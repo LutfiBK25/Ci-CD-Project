@@ -70,6 +70,21 @@ pipeline{
                 }
             }
         }
+        stage("Deploying app to k8s cluster"){
+            steps {
+                script{
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'mykubeconfig', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                
+                    // first 2 commands used once to download ./kubectl
+                    // sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.27.1/bin/linux/amd64/kubectl"'  
+                    // sh 'chmod u+x ./kubectl'
+                    // sh './kubectl get nodes'
+                    // sh './kubectl version --short'
+                    sh 'helm version'
+                    }
+                }
+            }
+        }
     }
     post{
         always{ // always means it will happen if it was sucess or fail
