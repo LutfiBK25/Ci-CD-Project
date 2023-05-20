@@ -125,7 +125,16 @@ sh './kubectl version --short'
 ### myapp pods giving CreateContainerConfigError in STATUS
 - Problem: whern doing command `kubectl get all` they are not going into the ready state even after 60s (which i put in deployment).
 - Analyzing: `kubectl get pods` show the pods with error and then using `kubectl logs <pod name>` gave me `waiting to start: CreateContainerConfigError` which i google next and then used command `kubectl describe pod <pod name>` and got ` Error: container has runAsNonRoot and image will run as root`
-- Solution: 
+- Solution: added `runAsUser: 11000` to security context in depolyment.yaml
+
+### myapp pods giving CrashLoopBackOff in STATUS
+- Problem: when checking describe for the pods found the following error
+```
+  Warning  Unhealthy         21s (x3 over 31s)  kubelet            Liveness probe failed: Get "http://192.168.166.151:8080/": dial tcp 192.168.166.151:8080: connect: connection refused
+  Normal   Killing           21s                kubelet            Container myapp failed liveness probe, will be restarted
+  Warning  Unhealthy         1s (x8 over 31s)   kubelet            Readiness probe failed: Get "http://192.168.166.151:8080/": dial tcp 192.168.166.151:8080: connect: connection refused
+```
+-
 
 ### Datree Policies
 
