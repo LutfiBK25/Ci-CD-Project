@@ -122,6 +122,11 @@ sh './kubectl get nodes'
 sh './kubectl version --short'
 '''
 
+### myapp pods giving CreateContainerConfigError in STATUS
+- Problem: whern doing command `kubectl get all` they are not going into the ready state even after 60s (which i put in deployment).
+- Analyzing: `kubectl get pods` show the pods with error and then using `kubectl logs <pod name>` gave me `waiting to start: CreateContainerConfigError` which i google next and then used command `kubectl describe pod <pod name>` and got ` Error: container has runAsNonRoot and image will run as root`
+- Solution: 
+
 ### Datree Policies
 
 [X] Policy check
