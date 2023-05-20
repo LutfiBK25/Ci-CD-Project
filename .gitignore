@@ -6,7 +6,7 @@ secrets.txt
 .gradle
 /build/
 kconfig
-
+test
 # Ignore Gradle GUI config
 gradle-app.setting
 
