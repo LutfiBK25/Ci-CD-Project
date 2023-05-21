@@ -58,7 +58,7 @@ On your Google account: <br />
 - install k8s plugin
 - in manage jenkins go to Manage Nodes and Clouds and through cloud add and kubernetes and add credential through file and copy config file in .kube in master node and upload it
 - creating jenkins stage use kubeconfig syntax to handle the connection
-- create a file /etc/docker/daemon.json in that file add details of nexus
+- create a file /etc/docker/daemon.json in that file add details of nexus (create on both master and node)
 ```
 { "insecure-registries":["nexus_machine_ip:8083"] }
 ```
@@ -86,6 +86,11 @@ spec:
 
 
 ## Errors
+
+### Installing Kubectl kubeadm kubelet
+- Problem : tried to rebuild the k8s cluster and i get this error ` The following signatures couldn't be verified because the public key is not available: NO_PUBKEY B53DC80D13EDEF05` apparentally google messed up or somthing
+- found a replacement link `sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://dl.k8s.io/apt/doc/apt-key.gpg` when geting the gpg key instead of orginal gpg link
+
 ### Calico Nodes were not in ready state
 - Solution: open BGP port TCP 179
 
