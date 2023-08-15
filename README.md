@@ -1,3 +1,5 @@
+Note: This project was finished but a lot didn't get documented as I switched to just learning and testing Jenkins Datree Helm Charts Sonar
+
 # CI/CD Pipeline
 ## Tools used
 - Git
@@ -6,7 +8,7 @@
 - Nexus
 - SonarQube
 - Helm
-- datree.io
+- datree.io (they are retiring D:)
 
 
 ## Steps
